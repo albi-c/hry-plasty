@@ -1,1 +1,82 @@
+<html>
+	<head>
+		<title>Roztrid na plasty, papir a ostatni</title>
+		<meta charset="utf-8" />
+		<style>
+		#header {
+			font-size: 45px;
+		}
+		.res, 	#qnext {
+			font-size: 25px;
+			align: center;
+			width: 200px;
+			height: 80px;
+			border: solid black 2px;
+			outline: 0;
+		}
+		.sres {
+			color: blue;
+			border: solid blue 2px;
+		}
+		#qnext:hover {
+			border: solid red 2px;
+			color: red;
+		}
+		.res:hover {
+			border: solid #09b 2px;
+			color: #09b;
+		}
+		</style>
+	</head>
+	<body>
+		<h1 id="header">Roztrid na plasty, papir a ostatni</h1>
+		<div id="question" max-width="500px">
+			<img id="qimg" src="question.png" width="150px" height="150px">
+			<br><br>
+			<div id="resgroup">
+				<button onclick="setResponse('plastic');" class="res sres" id="plastic">Plasty</button>
+				<br><br>
+				<button onclick="setResponse('paper');" class="res" id="paper">Papir</button>
+				<br><br>
+				<button onclick="setResponse('other');" class="res" id="other">Ostatni</button>
+			</div>
+			<br><br><br>
+			<button onclick="nextQuestion();" id="qnext" class>Dalsi</button>
+		</div>
+		<script>
+		var rese = document.getElementsByClassName("res");
+		var i;
+		var sel = "plastic";
+		var qlist = [
+			{
+				img: "question.png"
+			}
+		];
+		var qid = -1;
+		var qimg = document.getElementById("qimg");
+		
+		function setResponse(res) {
+			sel = res;
+			for (i = 0; i < rese.length; i++) {
+				rese[i].classList.remove("sres");
+				if (rese[i].id == sel)
+					rese[i].classList.add("sres");
+			}
+		}
+		
+		function nextQuestion() {
+			qid += 1;
+			if (qid >= qlist.length)
+				endQuiz();
+			qimg.src = qlist[qid].img;
+		}
+		
+		function endQuiz() {
+			//TODO: finish
+		}
+		
+		nextQuestion();
+		</script>
+	</body>
+</html>
 
