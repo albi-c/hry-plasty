@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Roztrid na plasty, papir a ostatni</title>
+		<title>Roztřid na plasty, papír a ostatní</title>
 		<meta charset="utf-8" />
 		<style>
 		.header {
@@ -9,7 +9,7 @@
 		.res, 	#qnext {
 			font-size: 25px;
 			align: center;
-			width: 300px;
+			width: 400px;
 			height: 80px;
 			border: solid black 2px;
 			outline: 0;
@@ -31,26 +31,26 @@
 		</style>
 	</head>
 	<body>
-		<h1 class="header">Roztrid na plasty, papir a ostatni</h1>
-		<img id="qimg" src="question.png" width="200px" height="200px">
+		<h1 class="header">Roztřiď na plasty, papír a ostatní</h1>
+		<img id="qimg" src="question.png" width="300px" height="300px">
 		<div id="question" max-width="500px" class="">
 			<br><br>
 			<div id="resgroup">
 				<button onclick="setResponse('plastic');" class="res" id="plastic">Plasty</button>
 				<br><br>
-				<button onclick="setResponse('paper');" class="res" id="paper">Papir</button>
+				<button onclick="setResponse('paper');" class="res" id="paper">Papír</button>
 				<br><br>
-				<button onclick="setResponse('other');" class="res" id="other">Ostatni</button>
+				<button onclick="setResponse('other');" class="res" id="other">Ostatní</button>
 			</div>
 			<br><br><br>
-			<button onclick="nextQuestion();" id="qnext" class>Dalsi</button>
+			<button onclick="nextQuestion();" id="qnext" class>Další otázka</button>
 		</div>
 		<div id="end" class="hidden">
-			<h1 class="header">Test skoncil!</h1>
+			<h1 class="header">Test skončil!</h1>
 			<br>
-			<h1>Mel(a) jsi spravne <span style="color: #2d2;" id="good">X</span>/<span id="total">X</span></h2>
+			<h1>Měl(a) jsi správně <span style="color: #2d2;" id="good">X</span>/<span id="total">X</span></h2>
 			<br><br>
-			<button onclick="reset();" class="res" id="nexts" style="border: solid red 2px; color: red;">Dalsi zak (reset)</button>
+			<button onclick="reset();" class="res" id="nexts" style="border: solid red 2px; color: red;">Další žák (reset)</button>
 		</div>
 		<script>
 		var rese = document.getElementsByClassName("res");
@@ -110,6 +110,7 @@
 			for (i = 0; i < rese.length; i++) {
 				if (qid != -1 && rese[i].classList.contains("sres") && rese[i].id == qlist[qid].resp) {
 					goodc += 1;
+					rese[i].classList.remove("sres");
 				}
 			}
 			if (qid >= qlist.length - 1) {
@@ -118,9 +119,9 @@
 				qid += 1;
 				qimg.src = qlist[qid].img;
 				if (qid == qlist.length - 1)
-					qnext.innerHTML = "Ukoncit";
+					qnext.innerHTML = "Ukončit";
 				else
-					qnext.innerHTML = "Dalsi";
+					qnext.innerHTML = "Další";
 			}
 		}
 		
@@ -139,6 +140,9 @@
 			goodc = 0;
 			end.classList.add("hidden");
 			q.classList.remove("hidden");
+			for (i = 0; i < rese.length; i++) {
+				rese[i].classList.remove("sres");
+			}
 			nextQuestion();
 		}
 		
