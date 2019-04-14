@@ -99,7 +99,20 @@
 		var total = document.getElementById("total");
 		var goodc = 0;
 		total.innerHTML = qlist.length;
-		
+
+		function shuffle(a) {
+    		var j, x, i;
+    		for (i = a.length - 1; i > 0; i--) {
+    		    j = Math.floor(Math.random() * (i + 1));
+    		    x = a[i];
+    		    a[i] = a[j];
+    		    a[j] = x;
+   			 }
+   			 return a;
+		}
+
+		qlist = shuffle(qlist);
+
 		function setResponse(res) {
 			sel = res;
 			for (i = 0; i < rese.length; i++) {
@@ -139,6 +152,7 @@
 		function reset() {
 			sel = plastic;
 			resp = [];
+			qlist = shuffle(qlist);
 			qid = -1;
 			goodc = 0;
 			end.classList.add("hidden");
