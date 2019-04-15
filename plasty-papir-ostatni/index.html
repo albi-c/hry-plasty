@@ -3,9 +3,6 @@
 		<title>Roztřid na plasty, papír a ostatní</title>
 		<meta charset="utf-8" />
 		<style>
-		html {
-			font-family: Arial;
-		}
 		.header {
 			font-size: 50px;
 		}
@@ -51,7 +48,7 @@
 		<div id="end" class="hidden">
 			<h1 class="header">Test skončil!</h1>
 			<br>
-			<h1>Měl(a) jsi správně <span style="color: #2d2;" id="good">X</span>/<span id="total">X</span></h2>
+			<h1>Měl(a) jsi správně <span style="color: #2d2;" id="good">X</span>/<span id="total">X</span>. <span id="appr"></span></h2>
 			<br><br>
 			<button onclick="reset();" class="res" id="nexts" style="border: solid red 2px; color: red;">Další žák (reset)</button>
 		</div>
@@ -99,20 +96,10 @@
 		var total = document.getElementById("total");
 		var goodc = 0;
 		total.innerHTML = qlist.length;
-
-		function shuffle(a) {
-    		var j, x, i;
-    		for (i = a.length - 1; i > 0; i--) {
-    		    j = Math.floor(Math.random() * (i + 1));
-    		    x = a[i];
-    		    a[i] = a[j];
-    		    a[j] = x;
-   			 }
-   			 return a;
-		}
-
-		qlist = shuffle(qlist);
-
+		var needwin = 6;
+		var almostwin = 5;
+		var appr = document.getElementById("appr");
+		
 		function setResponse(res) {
 			sel = res;
 			for (i = 0; i < rese.length; i++) {
@@ -146,13 +133,21 @@
 			q.classList.add("hidden");
 			end.classList.remove("hidden");
 			qimg.src = "question.png";
+			appr.innerHTML = "Nic moc..."
+			if (goodc >= almostwin) {
+				qimg.src = "win2.jpg";
+				appr.innerHTML = "Velmi dobře!";
+			}
+			if (goodc >= needwin) {
+				qimg.src = "win.jpg";
+				appr.innerHTML = "Výborně!";
+			}
 			good.innerHTML = goodc;
 		}
 		
 		function reset() {
 			sel = plastic;
 			resp = [];
-			qlist = shuffle(qlist);
 			qid = -1;
 			goodc = 0;
 			end.classList.add("hidden");
