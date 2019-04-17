@@ -3,7 +3,7 @@ from threading import Thread
 import sys
 
 class Game:
-    games = {"plasty-papir-ostatni": {"type": "web", "url": "plasty-papir-ostatni/index.html"}}
+    games = {"plasty-papir-ostatni": {"type": "web", "url": "plasty-papir-ostatni/index.html"}} a
     def __init__(self, name):
         self.name = name
         self.type = Game.gettype(name)
