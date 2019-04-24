@@ -1,3 +1,46 @@
 <html>
 	<head>
+		<title>Pexeso</title>
+		<meta charset="utf-8" />
+		<style>
+		.img {
+			border: solid black 2px;
+			width: 200px;
+			height: 200px;
+		}
+		</style>
+	</head>
+	<body>
+		<div id="main">
+		</div>
+		<script>
+		var main = document.getElementById("main");
+		
+		function createElements(rowsc, colsc) {
+			let els = [];
+			for (let i = 0; i < rowsc; i++) {
+				for (let j = 0; j < colsc; j++) {
+					els.push(document.createElement("img"));
+					els[els.length - 1].classList.add("img");
+				}
+				els.push(document.createElement("br"));
+			}
+			return els;
+		}
+		
+		function createOneElement(els) {
+			let el = document.createElement("div");
+			for (let i = 0; i < els.length; i++) {
+				el.appendChild(els[i]);
+			}
+			return el;
+		}
+		
+		function startGame() {
+			let els = createElements();
+			main.innerHTML = "";
+			main.appendChild(createOneElement(els));
+		}
+		</script>
+	</body>
 </html>
