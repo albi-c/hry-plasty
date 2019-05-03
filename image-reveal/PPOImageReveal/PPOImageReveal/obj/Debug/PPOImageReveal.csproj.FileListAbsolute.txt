@@ -1,0 +1,10 @@
+C:\Users\Tom\source\repos\PPOImageReveal\PPOImageReveal\bin\Debug\PPOImageReveal.exe.config
+C:\Users\Tom\source\repos\PPOImageReveal\PPOImageReveal\bin\Debug\PPOImageReveal.exe
+C:\Users\Tom\source\repos\PPOImageReveal\PPOImageReveal\bin\Debug\PPOImageReveal.pdb
+C:\Users\Tom\source\repos\PPOImageReveal\PPOImageReveal\obj\Debug\PPOImageReveal.csprojAssemblyReference.cache
+C:\Users\Tom\source\repos\PPOImageReveal\PPOImageReveal\obj\Debug\PPOImageReveal.Form.resources
+C:\Users\Tom\source\repos\PPOImageReveal\PPOImageReveal\obj\Debug\PPOImageReveal.Properties.Resources.resources
+C:\Users\Tom\source\repos\PPOImageReveal\PPOImageReveal\obj\Debug\PPOImageReveal.csproj.GenerateResource.cache
+C:\Users\Tom\source\repos\PPOImageReveal\PPOImageReveal\obj\Debug\PPOImageReveal.csproj.CoreCompileInputs.cache
+C:\Users\Tom\source\repos\PPOImageReveal\PPOImageReveal\obj\Debug\PPOImageReveal.exe
+C:\Users\Tom\source\repos\PPOImageReveal\PPOImageReveal\obj\Debug\PPOImageReveal.pdb
