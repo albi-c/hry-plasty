@@ -30,4 +30,5 @@ def start(name):
     th = Thread(target=start_, args=(name,))
     th.start()
 
-start(sys.argv[1])
+if __name__ == "__main__":
+    start(sys.argv[1])
