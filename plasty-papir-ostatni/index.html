@@ -14,10 +14,6 @@
 			border: solid black 2px;
 			outline: 0;
 		}
-		.sres {
-			color: blue;
-			border: solid blue 2px;
-		}
 		#qnext {
 			border: solid red 2px;
 			color: red;
@@ -47,19 +43,17 @@
 		<div id="question" max-width="500px" class="">
 			<br><br>
 			<div id="resgroup">
-				<button onclick="setResponse('plastic');" class="res" id="plastic">Plasty</button>
+				<button onclick="setResponse('plastic', this);" class="res" id="plastic">Plasty</button>
 				<br><br>
-				<button onclick="setResponse('paper');" class="res" id="paper">Papír</button>
+				<button onclick="setResponse('paper', this);" class="res" id="paper">Papír</button>
 				<br><br>
-				<button onclick="setResponse('other');" class="res" id="other">Ostatní</button>
+				<button onclick="setResponse('other', this);" class="res" id="other">Ostatní</button>
 			</div>
-			<br><br><br>
-			<button onclick="nextQuestion();" id="qnext" class>Další otázka</button>
 		</div>
 		<div id="end" class="hidden">
 			<h1 class="header">Test skončil!</h1>
 			<br>
-			<h1>Měl(a) jsi správně <span style="color: #2d2;" id="good">X</span>/<span id="total">X</span>. <span id="appr"></span></h2>
+			<h2>Měl(a) jsi správně <span style="color: #2d2;" id="good">X</span>/<span id="total">X</span>. <span id="appr"></span></h2>
 			<br><br>
 			<button onclick="reset();" class="res" id="nexts" style="border: solid red 2px; color: red;">Další žák (reset)</button>
 		</div>
@@ -141,13 +135,13 @@
 			timep.style.width = (st * MULPROGRESS) + "px";
 		}
 		
-		function setResponse(res) {
+		function setResponse(res, btn) {
 			sel = res;
 			for (i = 0; i < rese.length; i++) {
 				rese[i].classList.remove("sres");
-				if (rese[i].id == sel)
-					rese[i].classList.add("sres");
 			}
+			btn.classList.add("sres");
+			nextQuestion();
 		}
 		
 		function nextQuestion() {
@@ -162,10 +156,6 @@
 			} else {
 				qid += 1;
 				qimg.src = qlist[qid].img;
-				if (qid == qlist.length - 1)
-					qnext.innerHTML = "Ukončit";
-				else
-					qnext.innerHTML = "Další";
 			}
 		}
 		
@@ -220,8 +210,8 @@
 				}
 				if (time.secst >= TIME) {
 					addTime = false;
-					alert("Čas vypršel!");
 					reset();
+					alert("Čas vypršel!");
 				}
 			}
 		}, 1000);
