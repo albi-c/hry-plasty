@@ -28,6 +28,17 @@
 			overflow: hidden;
 			display: none;
 		}
+		#progresscontainer {
+			background-color: #22f;
+			width: 200px;
+			height: 20px;
+			border: solid black 1px;
+		}
+		#timeprogress {
+			height: 100%;
+			width: 0%;
+			background-color: #2f2;
+		}
 		</style>
 	</head>
 	<body>
@@ -52,6 +63,19 @@
 			<br><br>
 			<button onclick="reset();" class="res" id="nexts" style="border: solid red 2px; color: red;">Další žák (reset)</button>
 		</div>
+		<br><br>
+		<table>
+			<tr>
+				<td>
+					<p id="time">00:00</p>
+				</td>
+				<td>
+					<div id="progresscontainer">
+						<div id="timeprogress"></div>
+					</div>
+				</td>
+			</tr>
+		</table>
 		<script>
 		var rese = document.getElementsByClassName("res");
 		var i;
@@ -96,9 +120,26 @@
 		var total = document.getElementById("total");
 		var goodc = 0;
 		total.innerHTML = qlist.length;
-		var needwin = 6;
-		var almostwin = 5;
 		var appr = document.getElementById("appr");
+		var time = {"mins": 0, "secs": 0, "secst": 0};
+		var timee = document.getElementById("time");
+		var timep = document.getElementById("timeprogress");
+		var timepc = document.getElementById("progresscontainer");
+		var addTime = true;
+		
+		var TIME = 50;
+		var REDTIME = TIME - 10;
+		var ALMOSTWIN = 5;
+		var NEEDWIN = ALMOSTWIN + 1;
+		var PROGRESSMAXWIDTH = 200;
+		var MULPROGRESS = PROGRESSMAXWIDTH / TIME;
+		
+		timep.max = TIME;
+		timepc.style.width = PROGRESSMAXWIDTH + "px";
+		
+		function setProgress(st) {
+			timep.style.width = (st * MULPROGRESS) + "px";
+		}
 		
 		function setResponse(res) {
 			sel = res;
@@ -129,16 +170,17 @@
 		}
 		
 		function endQuiz() {
+			addTime = false;
 			qid = -1;
 			q.classList.add("hidden");
 			end.classList.remove("hidden");
 			qimg.src = "question.png";
 			appr.innerHTML = "Nic moc..."
-			if (goodc >= almostwin) {
+			if (goodc >= ALMOSTWIN) {
 				qimg.src = "win2.jpg";
-				appr.innerHTML = "Velmi dobře!";
+				appr.innerHTML = "Dobře.";
 			}
-			if (goodc >= needwin) {
+			if (goodc >= NEEDWIN) {
 				qimg.src = "win.jpg";
 				appr.innerHTML = "Výborně!";
 			}
@@ -155,10 +197,34 @@
 			for (i = 0; i < rese.length; i++) {
 				rese[i].classList.remove("sres");
 			}
+			time = {"mins": 0, "secs": 0, "secst": 0};
+			addTime = true;
+			timep.style.backgroundColor = "#2f2";
 			nextQuestion();
 		}
 		
 		nextQuestion();
+		
+		setInterval(function () {
+			if (addTime) {
+				time.secs += 1;
+				time.secst += 1;
+				if (time.secs >= 60) {
+					time.secs = 0;
+					time.mins += 1;
+				}
+				timee.innerHTML = (time.mins.toString().length === 1 ? ("0" + time.mins) : time.mins) + ":" + (time.secs.toString().length === 1 ? ("0" + time.secs) : time.secs);
+				setProgress(time.secst);
+				if (time.secst >= REDTIME) {
+					timep.style.backgroundColor = "#f22";
+				}
+				if (time.secst >= TIME) {
+					addTime = false;
+					alert("Čas vypršel!");
+					reset();
+				}
+			}
+		}, 1000);
 		</script>
 	</body>
 </html>
